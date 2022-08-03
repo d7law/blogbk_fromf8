@@ -10,7 +10,7 @@
     },
     "repository": {
         "type": "git",
-        "url": "git+https://github.com/lawd7/blogbk_fromf8.git"
+        "url": "git+https://github.com/d7law/blogbk_fromf8.git"
     },
     "keywords": [
         "dlaw7",
@@ -21,9 +21,9 @@
     "author": "lawd7 Cao Nhan",
     "license": "ISC",
     "bugs": {
-        "url": "https://github.com/lawd7/blogbk_fromf8/issues"
+        "url": "https://github.com/d7law/blogbk_fromf8/issues"
     },
-    "homepage": "https://github.com/lawd7/blogbk_fromf8#readme",
+    "homepage": "https://github.com/d7law/blogbk_fromf8#readme",
     "dependencies": {
         "express": "^4.18.1",
         "express-handlebars": "^6.0.6"
