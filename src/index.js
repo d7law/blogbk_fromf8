@@ -9,6 +9,11 @@ const port = 3000;
 const route = require('./routes');
 const { type } = require('os');
 
+const db = require('./config/db/index');
+
+//Connect to DB
+db.connect();
+
 app.use(express.static(path.join(__dirname, 'public')));
 // HTTP logger
 app.use(morgan('combined'));
