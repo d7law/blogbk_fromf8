@@ -22,10 +22,12 @@
     <table class="table mt-3">
         <thead>
             <tr>
-                <th scope="col" colspan="2">#</th>
-                <th scope="col">Tên khóa học</th>
-                <th scope="col">Thời gian tạo</th>
-                <th scope="col">Id Video</th>
+                <th scope="col"></th>
+                <th scope="col">ID khóa học {{{sortable '_id' _sort}}}
+                </th>
+                <th scope="col"> Tên khóa học {{{sortable 'name' _sort}}} </th>
+                <th scope="col">Thời gian tạo {{{sortable 'createdAt' _sort}}}</th>
+                <th scope="col">Id Video {{{sortable 'videoId' _sort}}}</th>
             </tr>
         </thead>
         <tbody>
@@ -37,7 +39,8 @@
                             id="checkItem">
                     </div>
                 </td>
-                <th scope="row">{{sum @index 1}}</th>
+                {{!-- <th scope="row">{{sum @index 1}}</th> --}}
+                <th class="text-center">{{this._id}}</th>
                 <td>{{this.name}}</td>
                 <td>{{this.createdAt}}</td>
                 <td>{{this.videoId}}</td>

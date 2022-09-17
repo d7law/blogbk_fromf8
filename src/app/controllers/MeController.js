@@ -3,9 +3,16 @@ const { multipleMoongoseToObject } = require('../../util/moongoose');
 class MeController {
     //[GET] /me/stored/courses
     storedCourses(req, res, next) {
+        let courseQuery = Course.find({});
+        //Sort function
+        if (req.query.hasOwnProperty('_sort')) {
+            courseQuery.sort({
+                [req.query.column]: req.query.type,
+            });
+        }
 
         //promise.all([array]) dùng để controls một group promise
-        Promise.all([Course.find({}), Course.countDocumentsDeleted()]).then(([courses, deletedCount]) =>
+        Promise.all([courseQuery, Course.countDocumentsDeleted()]).then(([courses, deletedCount]) =>
             res.render('me/storedCourses', {
                 courses: multipleMoongoseToObject(courses),
                 deletedCount,

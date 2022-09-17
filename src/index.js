@@ -7,6 +7,8 @@ const methodOverride = require('method-override');
 const app = express();
 const port = 3000;
 
+const SortMiddleware = require('./app/middlewares/SortMiddleware');
+
 const route = require('./routes');
 const { type } = require('os');
 
@@ -17,9 +19,9 @@ db.connect();
 
 app.use(express.static(path.join(__dirname, 'public')));
 
-//
+//middleware to override method(put, path, ...v.v)
 app.use(methodOverride('_method'));
-// HTTP logger
+//middleware HTTP logger
 app.use(morgan('combined'));
 //Middleware dùng để gán dữ liệu vào body trong POST Method
 app.use(
@@ -29,6 +31,8 @@ app.use(
 );
 app.use(express.json());
 
+app.use(SortMiddleware);
+
 // Template engine
 app.engine(
     '.hbs',
@@ -36,6 +40,22 @@ app.engine(
         extname: '.hbs',
         helpers: {
             sum: (a, b) => a + b,
+            sortable: (field, sort) => {
+                const sortType = field === sort.column ? sort.type : 'default';
+                const icons = {
+                    default: 'fa-solid fa-sort',
+                    asc: 'fa-solid fa-arrow-up-z-a',
+                    desc: 'fa-solid fa-arrow-down-a-z',
+                };
+                const types = {
+                    default: 'desc',
+                    asc: 'desc',
+                    desc: 'asc',
+                };
+                const icon = icons[sortType];
+                const type = types[sortType];
+                return `<a href ="?_sort&column=${field}&type=${type}"><i class="${icon}"></i></a>`;
+            },
         },
     }),
 );
